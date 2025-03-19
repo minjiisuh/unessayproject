@@ -17,6 +17,8 @@ import pymupdf as fitz
 import io
 import re
 import nltk
+import networkx as nx
+
 
 st.title("Jikji vs. King James Bible: A Text Analysis")
 
@@ -112,6 +114,17 @@ if jikji_file and kjv_file:
     fig, ax = plt.subplots()
     kjv_word_freq_df.head(10).plot(kind="bar", x="Word", y="Frequency", legend=False, color="lightcoral", ax=ax)
     plt.xticks(rotation=45)
+    st.pyplot(fig)
+
+    common_words = set(jikji_word_counts.keys()) & set(kjv_word_counts.keys())
+    G = nx.Graph()
+    for word in common_words:
+        G.add_edge("Jikji", word)
+        G.add_edge("KJV", word)
+    
+    st.subheader("Network Graph of Common Words Between Jikji and KJV")
+    fig, ax = plt.subplots(figsize=(12, 6))
+    nx.draw(G, with_labels=True, font_size=8, node_size=50, edge_color="gray", ax=ax)
     st.pyplot(fig)
 
     st.success("Complete")
