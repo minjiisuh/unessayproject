@@ -29,6 +29,7 @@ def extract_text_from_pdf(pdf_path):
     for page in doc:
         text += page.get_text("text") + " "
     return text
+
 def extract_text_from_html(html_path):
     with open(html_path, "r", encoding="utf-8") as file:
         soup = BeautifulSoup(file, "html.parser")
