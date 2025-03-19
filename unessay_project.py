@@ -140,6 +140,14 @@ if jikji_file and kjv_file:
     plt.xticks(rotation=45)
     st.pyplot(fig)
 
+    unique_jikji_words = len(set(jikji_words)) / len(jikji_words)
+    unique_kjv_words = len(set(kjv_words)) / len(kjv_words)
+
+    st.subheader("Standardization of Language in Jikji vs. KJV")
+    st.write("The level of word repetition can indicate standardization in print.")
+    st.metric(label="Jikji Unique Word Ratio", value=round(unique_jikji_words, 4))
+    st.metric(label="KJV Unique Word Ratio", value=round(unique_kjv_words, 4))
+
     st.success("Complete")
 
 st.info("Upload the Jikji pdf and King James Bible html file")
