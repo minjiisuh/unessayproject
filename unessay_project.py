@@ -14,6 +14,7 @@ from wordcloud import WordCloud
 from collections import Counter
 from bs4 import BeautifulSoup
 import pymupdf as fitz
+import io
 import re
 import nltk
 
@@ -23,12 +24,17 @@ from nltk.corpus import stopwords
 nltk.download('stopwords')
 
 # Function to extract text from a PDF
-def extract_text_from_pdf(pdf_path):
-    doc = fitz.open(pdf_path)
-    text = ""
-    for page in doc:
-        text += page.get_text("text") + " "
-    return text
+def extract_text_from_pdf(pdf_file):
+    """Reads and extracts text from an uploaded PDF file."""
+    if pdf_file is not None:
+        pdf_bytes = pdf_file.read()
+        pdf_document = fitz.open(stream=io.BytesIO(pdf_bytes), filetype="pdf")
+        
+        text = ""
+        for page in pdf_document:
+            text += page.get_text("text") + " "
+        return text
+    return ""
 
 def extract_text_from_html(html_path):
     with open(html_path, "r", encoding="utf-8") as file:
