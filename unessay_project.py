@@ -25,7 +25,6 @@ nltk.download('stopwords')
 
 # Function to extract text from a PDF
 def extract_text_from_pdf(pdf_file):
-    """Reads and extracts text from an uploaded PDF file."""
     if pdf_file is not None:
         pdf_bytes = pdf_file.read()
         pdf_document = fitz.open(stream=io.BytesIO(pdf_bytes), filetype="pdf")
