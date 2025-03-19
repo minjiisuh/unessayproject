@@ -1,7 +1,6 @@
 pandas
 matplotlib
 wordcloud
-pip install pymupdf
 pymupdf
 beautifulsoup4
 requests
