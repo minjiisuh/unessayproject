@@ -12,6 +12,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from collections import Counter
+from bs4 import BeautifulSoup
 import fitz
 import re
 import nltk
@@ -27,6 +28,11 @@ def extract_text_from_pdf(pdf_path):
     text = ""
     for page in doc:
         text += page.get_text("text") + " "
+    return text
+def extract_text_from_html(html_path):
+    with open(html_path, "r", encoding="utf-8") as file:
+        soup = BeautifulSoup(file, "html.parser")
+        text = soup.get_text()
     return text
 
 jikji_file = st.file_uploader("Upload Jikji pdf", type=["pdf"])
