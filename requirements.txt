@@ -1,7 +1,9 @@
 pandas
 matplotlib
 wordcloud
-fitz  
+pip install pymupdf
+pymupdf
+import pymupdf as fitz
 beautifulsoup4
 requests
 nltk
