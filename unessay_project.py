@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from collections import Counter
 from bs4 import BeautifulSoup
-import fitz
+import pymupdf as fitz
 import re
 import nltk
 
