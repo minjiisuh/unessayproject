@@ -18,6 +18,7 @@ import io
 import re
 import nltk
 import networkx as nx
+import seaborn as sns
 
 
 st.title("Jikji vs. King James Bible: A Text Analysis")
