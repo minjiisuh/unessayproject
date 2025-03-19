@@ -117,6 +117,14 @@ if jikji_file and kjv_file:
     plt.xticks(rotation=45)
     st.pyplot(fig)
 
+    unique_jikji_words = len(set(jikji_words)) / len(jikji_words)
+    unique_kjv_words = len(set(kjv_words)) / len(kjv_words)
+
+    st.subheader("Standardization of Language in Jikji vs. KJV")
+    st.write("The level of word repetition can indicate standardization in print.")
+    st.metric(label="Jikji Unique Word Ratio", value=round(unique_jikji_words, 4))
+    st.metric(label="KJV Unique Word Ratio", value=round(unique_kjv_words, 4))
+
     common_words = set(jikji_word_counts.keys()) & set(kjv_word_counts.keys())
     G = nx.Graph()
     for word in common_words:
@@ -133,20 +141,12 @@ if jikji_file and kjv_file:
     df_common_words = pd.DataFrame(common_word_freqs, columns=["Word", "Jikji", "KJV"])
     df_common_words = df_common_words.sort_values(by=["Jikji", "KJV"], ascending=False)
 
-    st.subheader("📊 Common Word Usage in Jikji vs. KJV")
+    st.subheader("Common Word Usage in Jikji vs. KJV")
     fig, ax = plt.subplots(figsize=(12, 6))
     df_common_words.head(20).plot(kind="bar", x="Word", stacked=True, ax=ax)
     plt.title("Common Word Usage in Jikji vs KJV")
     plt.xticks(rotation=45)
     st.pyplot(fig)
-
-    unique_jikji_words = len(set(jikji_words)) / len(jikji_words)
-    unique_kjv_words = len(set(kjv_words)) / len(kjv_words)
-
-    st.subheader("Standardization of Language in Jikji vs. KJV")
-    st.write("The level of word repetition can indicate standardization in print.")
-    st.metric(label="Jikji Unique Word Ratio", value=round(unique_jikji_words, 4))
-    st.metric(label="KJV Unique Word Ratio", value=round(unique_kjv_words, 4))
 
     st.success("Complete")
 
