@@ -128,6 +128,18 @@ if jikji_file and kjv_file:
     nx.draw(G, with_labels=True, font_size=8, node_size=50, edge_color="gray", ax=ax)
     st.pyplot(fig)
 
+    common_words = set(jikji_word_counts.keys()) & set(kjv_word_counts.keys())
+    common_word_freqs = [(word, jikji_word_counts[word], kjv_word_counts[word]) for word in common_words]
+    df_common_words = pd.DataFrame(common_word_freqs, columns=["Word", "Jikji", "KJV"])
+    df_common_words = df_common_words.sort_values(by=["Jikji", "KJV"], ascending=False)
+
+    st.subheader("📊 Common Word Usage in Jikji vs. KJV")
+    fig, ax = plt.subplots(figsize=(12, 6))
+    df_common_words.head(20).plot(kind="bar", x="Word", stacked=True, ax=ax)
+    plt.title("Common Word Usage in Jikji vs KJV")
+    plt.xticks(rotation=45)
+    st.pyplot(fig)
+
     st.success("Complete")
 
 st.info("Upload the Jikji pdf and King James Bible html file")
