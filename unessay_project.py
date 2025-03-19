@@ -35,11 +35,15 @@ def extract_text_from_pdf(pdf_file):
         return text
     return ""
 
-def extract_text_from_html(html_path):
-    with open(html_path, "r", encoding="utf-8") as file:
-        soup = BeautifulSoup(file, "html.parser")
+def extract_text_from_html(html_file):
+    """Reads and extracts text from an uploaded HTML file in Streamlit."""
+    if html_file is not None:
+        html_content = html_file.read().decode("utf-8")
+
+        soup = BeautifulSoup(html_content, "html.parser")
         text = soup.get_text()
-    return text
+        return text
+    return ""
 
 jikji_file = st.file_uploader("Upload Jikji pdf", type=["pdf"])
 kjv_file = st.file_uploader("Upload King James Bible HTML", type=["html"])
